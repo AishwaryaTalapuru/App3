@@ -7,9 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.appstone.www.app2.R;
+import android.os.Bundle;
 
+import java.util.ArrayList;
+// Array of options ---> ArrayAdapter ---> ListView
+// List view: {views: da_items.xml}
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -19,6 +25,10 @@ import com.appstone.www.app2.R;
  * create an instance of this fragment.
  */
 public class first_floor extends Fragment {
+    ListView lv;
+    ArrayList<String> arrayList;
+    ArrayAdapter<String> adapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,17 +65,30 @@ public class first_floor extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
+
+
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_first_floor, container, false);
+        String[] menuItems = {"table1","table2"};
+        ListView listView = (ListView) view.findViewById(R.id.tablesListView);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, menuItems);
+        listView.setAdapter(listViewAdapter);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first_floor, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
